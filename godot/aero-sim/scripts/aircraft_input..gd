@@ -1,6 +1,8 @@
 extends Node3D
 var udp := PacketPeerUDP.new()
 var throttle: float = 0.0
+const SEND_INTERVAL: float = 1.0 / 30.0
+var send_timer : float = 0.0
 func _ready() -> void:
 	udp.set_dest_address("127.0.0.1", 5005)
 	print("UDP dest config")
@@ -17,13 +19,14 @@ func _process(_delta: float) -> void:
 		print("Pitch: ", pitch, " | Roll: ", roll, " | Yaw: ", yaw)
 	if Input.is_action_just_released("throttle_up") or Input.is_action_just_released("throttle_down"):
 		print("Throttle: ", snappedf(throttle * 100.0, 0.1), "%")
-	var controls = {
-	"pitch": pitch,
-	"roll": roll,
-	"yaw": yaw,
-	"throttle": throttle
-}
-
-	if Input.is_action_just_pressed("pitch_up"):
+	send_timer += _delta
+	if send_timer >= SEND_INTERVAL:
+		send_timer -= SEND_INTERVAL
+		var controls = {
+			"pitch": pitch,
+			"roll": roll,
+			"yaw": yaw,
+			"throttle": throttle
+		}
 		var message = JSON.stringify(controls)
 		udp.put_packet(message.to_utf8_buffer())
