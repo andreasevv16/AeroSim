@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://gsoqmack3u51"]
+
+[ext_resource type="Script" uid="uid://duv3tkj4rxukx" path="res://scenes/runway_centerline.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://77s44ymkbcgg" path="res://scenes/aircraft.tscn" id="2_0wfyh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgp6g"]
+albedo_color = Color(0.32156864, 0.49019608, 0.23137255, 1)
+roughness = 0.9
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dlykt"]
+material = SubResource("StandardMaterial3D_sgp6g")
+size = Vector2(1000, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
+albedo_color = Color(0.21960784, 0.23137255, 0.2509804, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gphm5"]
+material = SubResource("StandardMaterial3D_o5qli")
+size = Vector2(30, 600)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pke04"]
+size = Vector2(0.8, 12)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sugp2"]
+material = SubResource("StandardMaterial3D_0wfyh")
+size = Vector2(0.8, 12)
+
+[sub_resource type="MultiMesh" id="MultiMesh_dlykt"]
+transform_format = 1
+mesh = SubResource("PlaneMesh_sugp2")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o5qli"]
+
+[sub_resource type="Sky" id="Sky_0wfyh"]
+sky_material = SubResource("ProceduralSkyMaterial_o5qli")
+
+[sub_resource type="Environment" id="Environment_dlykt"]
+background_mode = 2
+sky = SubResource("Sky_0wfyh")
+
+[node name="Main" type="Node3D" unique_id=1790275673]
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=715715707]
+transform = Transform3D(1, 0, 0, 0, 0.9999995, 0, 0, 0, 0.9999995, 0, 0, 0)
+mesh = SubResource("PlaneMesh_dlykt")
+
+[node name="Runway" type="MeshInstance3D" parent="." unique_id=748193824]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0.05, 0)
+mesh = SubResource("PlaneMesh_gphm5")
+
+[node name="Middle_line" type="MeshInstance3D" parent="." unique_id=793665804]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0.06, 0)
+visible = false
+mesh = SubResource("PlaneMesh_pke04")
+
+[node name="Middle_line2" type="MeshInstance3D" parent="." unique_id=924132212]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0.06, -24)
+visible = false
+mesh = SubResource("PlaneMesh_pke04")
+
+[node name="Runway_centerline" type="MultiMeshInstance3D" parent="." unique_id=149257993]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0.05, 0)
+multimesh = SubResource("MultiMesh_dlykt")
+script = ExtResource("1_o5qli")
+
+[node name="DebugCamera" type="Camera3D" parent="." unique_id=1790221839]
+transform = Transform3D(1, 0, 0, 0, 0.9781476, 0.2079117, 0, -0.2079117, 0.9781476, 0, 8, 225)
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1295984128]
+transform = Transform3D(0.8660254, -0.35355338, 0.35355338, 0, 0.70710677, 0.70710677, -0.5, -0.6123724, 0.6123724, 0, 0, 0)
+
+[node name="SkyEnvironment" type="WorldEnvironment" parent="." unique_id=1076082656]
+environment = SubResource("Environment_dlykt")
+
+[node name="Aircraft" parent="." unique_id=1688622145 instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 200)

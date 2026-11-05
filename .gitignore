@@ -1,0 +1,41 @@
+# ==========================================
+# AeroSim - Git Ignore
+# ==========================================
+
+# Python virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Godot generated files
+.godot/
+*.tmp
+
+# Temporary JSBSim experiment
+**/test_jsbsim.py
+
+# Generated JSBSim data
+JSBOUT*.csv
+
+# macOS system files
+.DS_Store
+.AppleDouble
+._*
+
+# VS Code local settings
+.vscode/
+
+# Logs and temporary files
+*.log
+*.bak
+*.swp
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example

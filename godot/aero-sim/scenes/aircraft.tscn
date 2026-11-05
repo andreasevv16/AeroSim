@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://77s44ymkbcgg"]
+
+[ext_resource type="Script" uid="uid://54mf7iytueoe" path="res://scripts/aircraft_input..gd" id="1_0lgdb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dlykt"]
+size = Vector3(1.2, 1.4, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gphm5"]
+size = Vector3(10.5, 0.18, 1.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pke04"]
+size = Vector3(3.6, 0.12, 0.9)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rhpgu"]
+size = Vector3(0.12, 1.4, 1.2)
+
+[node name="Aircraft" type="Node3D" unique_id=1688622145]
+script = ExtResource("1_0lgdb")
+
+[node name="Fusolage" type="MeshInstance3D" parent="." unique_id=1918800505]
+mesh = SubResource("BoxMesh_dlykt")
+
+[node name="Wings" type="MeshInstance3D" parent="." unique_id=1228570769]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, -0.4)
+mesh = SubResource("BoxMesh_gphm5")
+
+[node name="HorizontalStabilizer" type="MeshInstance3D" parent="." unique_id=1695022185]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 2.5)
+mesh = SubResource("BoxMesh_pke04")
+
+[node name="VeritcalStabilizer" type="MeshInstance3D" parent="." unique_id=1609721126]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.5)
+mesh = SubResource("BoxMesh_rhpgu")
